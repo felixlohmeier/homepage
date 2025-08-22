@@ -1,0 +1,389 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="author" content="Felix Lohmeier" />
+	<meta name="keywords" content="vufind,github,metrics,opensource,kooperation,anwendertreffen" />
+	<meta name="description" content="Keynote auf dem VuFind-Anwendertreffen am 28.9.2017 in Hamburg" />
+  <meta name="referrer" content="no-referrer">
+	<title>10 Jahre VuFind - Wie steht's um die Gesundheit der Open Source Community?</title>
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/sky.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- Titel -->
+<section>
+	<h3>10 Jahre VuFind</h3>
+	<h4>Wie steht's um die Gesundheit der Open Source Community?</h4>
+	<a href="http://repocheck.com/#https%3A%2F%2Fgithub.com%2Fvufind-org%2Fvufind"><img data-src="img/vufind-repocheck.png" style="border:0px" height="300"></a><br><br>
+	<h4><a href="http://www.vufind.de/anwendertreffen/anwendertreffen-2017/">VuFind Anwendertreffen 2017</a>, 28.9.2017, Hamburg<br>Keynote von <a href="https://felixlohmeier.de">Felix Lohmeier</a></h4>
+</section>
+
+<!-- Motivation -->
+<section>
+	<h3>Gesundheit?</h3>
+	<br>
+	<ul>
+	<li>In einer <a href="https://felixlohmeier.gitbooks.io/seminar-wir-bauen-uns-einen-bibliothekskatalog/content/02_1_referat_zu_pro_&_contra_von_open_source.html">Lehrveranstaltung an der HAW Hamburg</a> (WS 2016/17) habe ich mit den Studierenden Pro und Contra von Open Source diskutiert.</li>
+	<li>These: Bei Wahl von Open Source sollte für wichtige Dienste nur Software eingesetzt werden, die von einer lebendigen Community aus Interessierten und Nutzenden weiterentwickelt wird.</li>
+	<li><a href="https://github.com/vufind-org/vufind">VuFind</a> habe ich damals als Beispiel für eine gesunde Open Source Community angeführt. Hier jetzt eine systematischere Betrachtung.</li>
+	</ul>
+</section>
+
+<!-- Agenda -->
+<section>
+	<h3>Agenda</h3>
+	<br>
+	<ol>
+	<li>Anamnese und Befunde</li>
+	<li>Verdachtsdiagnose</li>
+	<li>Therapievorschlag</li>
+	</ol>
+	<br><br>
+	<i class="fa fa-user-md fa-5x"></i>
+</section>
+
+<!-- Teil 1: Anamnese und Befunde -->
+<section>
+	<h3>10 Jahre VuFind</h3>
+	<br>
+	<ul>
+	<li>Erster öffentlicher <a href="https://vufind.org/wiki/changelog#alpha">Release 0.5</a> am 18.7.2007</li>
+	<li>Juli 2007 bis Mai 2012</li>
+		<ul>
+		<li>Code in <a href="https://sourceforge.net/p/vufind/svn/">Sourceforge Subversion</a></li>
+		<li>Zur frühen Geschichte siehe <a href="https://finc.info/wp-content/uploads/2015/03/kinstler_steilen_maerchenstunde.pdf">Vortrag "Die Vufind Märchenstunde" von Till Kinstler und Gerald Steilen</a> auf dem 1. VuFind Anwendertreffen 2012 in Leipzig.</li>
+		</ul>
+	<li>Juni 2012 bis heute</li>
+		<ul>
+		<li>Code in <a href="https://github.com/vufind-org/vufind">GitHub Repository</a></li>
+		<li>Auf diesen Teil beziehen sich die folgenden Analysen</li>
+		</ul>		
+	</ul>
+</section>
+
+<section>
+	<h3>Erster Eindruck</h3>
+	<a href="http://repocheck.com/#https%3A%2F%2Fgithub.com%2Fvufind-org%2Fvufind"><img data-src="img/vufind-repocheck.png" style="border:0px" height="300"></a><br>
+	<ul>
+	<li><a href="http://repocheck.com/#https%3A%2F%2Fgithub.com%2Fvufind-org%2Fvufind">Repocheck.com</a> zählt Tickets (Issues) und externe Beiträge (Pull Requests) im vergangenen Monat</li>
+	<li>Setzt offene und geschlossene Dinge ins Verhältnis und normalisiert jeweils auf Skala 0-10</li>
+	<li>Gewichtung: 66% Pull Requests + 34% Issues</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Indikatoren</h3>
+	<ul>
+	<li>Anzahl und Diversität der Beitragenden (Contributors)</li>
+	<li>Regelmäßigkeit der Beiträge (Commits)</li>
+	<li>Anzahl von Tickets (Issues) und vergangene Zeit bis diese abgeschlossen werden</li>
+	<li>Anzahl von externen Beiträgen (Pull Requests) und vergangene Zeit bis diese abgeschlossen werden</li>
+	<li>Aktivität in Mailinglisten, Chat und Foren</li>
+	<li>Regelmäßigkeit von Videokonferenzen</li>
+	<li>Konferenzen und Anwendertreffen</li>
+	<li>Anzahl von Installationen / Downloads</li>
+	<li>... (s.a. <a href="https://opensource.guide/metrics/">Open Source Guides - Open Source Metrics</a>)</li>
+	</ul>
+</section>
+
+<section>
+	<h3><a href="http://ghv.artzub.com/#repo=vufind&climit=1000&user=vufind-org">GitHub Visualizer</a></h3>
+	<video data-autoplay data-src="video/github-visualizer.webm" type="video/webm" /></video>
+</section>
+
+<section>
+	<h3><a href="https://github.com/vufind-org/vufind/pulls?utf8=%E2%9C%93&q=is%3Apr%20is%3Amerged">GitHub Pull Requests</a></h3>
+	<p>525 abgeschlossen seit Juli 2012, davon 132 von Villanova University (Chris Hallberg, Demian Katz)</p>
+	<a href="https://github.com/vufind-org/vufind/pulls?utf8=%E2%9C%93&q=is%3Apr%20is%3Amerged"><img data-src="img/vufind-github-pull-requests.png" style="border:0px"></a>
+</section>
+
+<section>
+	<h3><a href="https://github.com/vufind-org/vufind/graphs/contributors">GitHub Contributors</a></h3>
+	<a href="https://github.com/vufind-org/vufind/graphs/contributors"><img data-src="img/vufind-github-contributors.png" style="border:0px" height=600"></a>
+</section>
+
+<section>
+	<h3><a href="https://github.com/vufind-org/vufind/graphs/punch-card">GitHub Punch card</a></h3>
+	<a href="https://github.com/vufind-org/vufind/graphs/punch-card"><img data-src="img/vufind-github-punchcard.png" style="border:0px" height=600"></a>
+</section>
+
+<section>
+	<h3>Open Hub</h3>
+	<p>VuFind selbst verweist auf die Statistiken von <a href="https://www.openhub.net/p/vufind">Open Hub</a> der Sicherheitsfirma Black Duck und hat unten rechts im Footer der Webseite ein Widget eingebaut.</p>
+	<a href="https://www.openhub.net/p/vufind"><img data-src="img/vufind-openhub-widget.png" style="border:0px"></a>
+</section>
+
+<section>
+	<h3><a href="https://www.openhub.net/p/vufind">Open Hub Activity</a></h3>
+	<a href="https://www.openhub.net/p/vufind"><img data-src="img/vufind-openhub-summary.png" style="border:0px" height=600"></a>
+</section>
+
+<section>
+	<h3><a href="https://www.openhub.net/p/vufind/contributors/summary">Open Hub Contributors</a></h3>
+	<a href="https://www.openhub.net/p/vufind/contributors/summary"><img data-src="img/vufind-openhub-contributors1.png" style="border:0px" height=600"></a>
+</section>
+
+<section>
+	<h3><a href="https://www.openhub.net/p/vufind/contributors/summary">Open Hub Contributors</a></h3>
+	<a href="https://www.openhub.net/p/vufind/contributors/summary"><img data-src="img/vufind-openhub-contributors2.png" style="border:0px" height=600"></a>
+</section>
+
+<section>
+	<h3>Dashboard mit Grimoirelab / Cauldron.io</a></h3>
+	<p><a href="http://grimoirelab.github.io">Grimoire Lab</a> ist ein Open-Source-Toolset für Software Development Analytics. Die Firma Biterga unterhält zusätzlich einen Webdienst unter <a href="https://cauldron.io">Cauldron.io</a></p>
+	<img data-src="img/vufind-grimoirelab-logo.png" style="border:0px">
+</section>
+
+<section>
+	<h3><a href="https://dashboard.cauldron.io/goto/97c0fb5d431adf9d60fc9f43433e0c8d">Cauldron.io Dashboard</a></h3>
+	<a href="https://dashboard.cauldron.io/goto/97c0fb5d431adf9d60fc9f43433e0c8d"><img data-src="img/vufind-cauldron-dashboard.png" style="border:0px" height=600"></a>
+</section>
+
+<section>
+	<h3><a href="https://dashboard.cauldron.io/goto/97c0fb5d431adf9d60fc9f43433e0c8d">Cauldron.io Geolocation</a></h3>
+	<a href="https://dashboard.cauldron.io/goto/97c0fb5d431adf9d60fc9f43433e0c8d"><img data-src="img/vufind-cauldron-dashboard-geo.png" style="border:0px" height=600"></a>
+</section>
+
+<section>
+	<h3><a href="https://dashboard.cauldron.io/goto/97c0fb5d431adf9d60fc9f43433e0c8d">Cauldron.io Top Submitters</a></h3>
+	<a href="https://dashboard.cauldron.io/goto/97c0fb5d431adf9d60fc9f43433e0c8d"><img data-src="img/vufind-cauldron-dashboard-top-submitters.png" style="border:0px"></a>
+</section>
+
+<section>
+	<h3><a href="https://dashboard.cauldron.io/goto/97c0fb5d431adf9d60fc9f43433e0c8d">Cauldron.io Pull Requests</a></h3>
+	<a href="https://dashboard.cauldron.io/goto/97c0fb5d431adf9d60fc9f43433e0c8d"><img data-src="img/vufind-cauldron-dashboard-prs-still-open.png" style="border:0px"></a>
+</section>
+
+<section>
+	<h3>CHAOSS</h3>
+	<ul>
+	<li>Komplexere Metriken sind in Entwicklung, Daten liegen leider noch nicht vor.</li>
+	<li>Neues Projekt der Linux Foundation <a href="https://chaoss.community">Community Health Analytics Open Source Software</a> (CHAOSS)</li>
+	<li>Weitreichender Entwurf für Metriken steht zur Diskussion offen</li>
+	</ul>
+	<p><a href="https://chaoss.community"><img data-src="img/vufind-chaoss-logo-small.png" style="border:0px"></a></p>
+</section>
+
+<section>
+	<h3><a href="https://wiki.linuxfoundation.org/chaoss/metrics#project-diversity-and-inclusion">CHAOSS Entwurf</a></h3>
+	<a href="https://wiki.linuxfoundation.org/chaoss/metrics#project-diversity-and-inclusion"><img data-src="img/vufind-chaoss-metrics1.png" style="border:0px" height="600"></a>
+</section>
+
+<section>
+	<h3><a href="https://wiki.linuxfoundation.org/chaoss/metrics#project-diversity-and-inclusion">CHAOSS Entwurf</a></h3>
+	<a href="https://wiki.linuxfoundation.org/chaoss/metrics#project-diversity-and-inclusion"><img data-src="img/vufind-chaoss-metrics2.png" style="border:0px" height="600"></a>
+</section>
+
+<section>
+	<h3><a href="https://wiki.linuxfoundation.org/chaoss/metrics#project-diversity-and-inclusion">CHAOSS Entwurf</a></h3>
+	<a href="https://wiki.linuxfoundation.org/chaoss/metrics#project-diversity-and-inclusion"><img data-src="img/vufind-chaoss-metrics3.png" style="border:0px" height="600"></a>
+</section>
+
+<section>
+	<h3><a href="https://wiki.linuxfoundation.org/chaoss/metrics#project-diversity-and-inclusion">CHAOSS Entwurf</a></h3>
+	<a href="https://wiki.linuxfoundation.org/chaoss/metrics#project-diversity-and-inclusion"><img data-src="img/vufind-chaoss-metrics4.png" style="border:0px" height="600"></a>
+</section>
+
+<section>
+	<h3>Datengrundlage</h3>
+	<p>Gezeigte Statistiken basieren auf der Historie des GitHub-Accounts <a href="https://github.com/vufind-org">vufind-org</a>.</p>
+	<p>Erweiterungen, die in Forks vorgehalten und nicht via Pull Requests in die Hauptentwicklung zurückgespielt werden, wurden nicht erfasst.</p>
+	<i class="fa fa-code-fork fa-5x"></i>
+</section>
+
+<section>
+	<h3>Tool <a href="http://forked.yannick.io/vufind-org/vufind">forked.yannick.io</a></h3>
+	<p>erleichtert das Auffinden von aktiven Forks</p>
+	<a href="http://forked.yannick.io/vufind-org/vufind"><img data-src="img/vufind-forked-yannick.png" style="border:0px"></a>
+</section>
+
+<section>
+	<h3>Vergleich mit GitHub</h3>
+	<img data-src="img/vufind-fork1.png" style="border:0px">
+	<img data-src="img/vufind-fork2.png" style="border:0px">
+	<img data-src="img/vufind-fork3.png" style="border:0px">
+	<img data-src="img/vufind-fork4.png" style="border:0px">
+	<img data-src="img/vufind-fork5.png" style="border:0px">
+	<img data-src="img/vufind-fork6.png" style="border:0px">
+</section>
+
+<!-- Teil 2: Verdachtsdiagnose -->
+
+<!-- Agenda -->
+<section>
+	<h3>Diagnose</h3>
+	<p>Auffälligkeiten im Sinne einer <a href="http://flexikon.doccheck.com/de/Verdachtsdiagnose">Verdachtsdiagnose</a></p>
+	<i class="fa fa-user-md fa-5x"></i>
+</section>
+
+<section>
+	<h3>Verdachtsdiagnose</h3>
+	<br>
+	<h2>Gefahr der Zersplitterung</h2>
+	<br>
+	<p>Patient ist aktuell kerngesund und behandlungsbereit (sonst wäre heute niemand hier auf dem Anwendertreffen)</p>
+</section>
+
+<section>
+	<h3>Forks</h3>
+	<h4>Nicht alle Erweiterungen und Anpassungen fließen in die Kernentwicklung zurück</h4>
+	<p>Versteckt sich noch etwas außerhalb der "master" branches in den GitHub-Repositorien? Für Außenstehende nicht leicht ersichtlich.</p>
+	<p>Vorschlag: Beschreibungstext der Repos anpassen, gilt auch für bereits <a href="http://www.vufind.de/github-repositorien/">unter Vufind.de Gelistete.</a></p>
+	<i class="fa fa-code-fork fa-5x"></i>
+</section>
+
+<section>
+	<h3>Modularität</h3>
+	<h4>Regelmäßig wiederkehrende Forderungen</h4>
+	<p>Beispiel VuFind-Anwendertreffen 2015:</p>
+	<ul>
+	<li>Vorgehensmodell zur nachhaltigen Entwicklung von lokalen und globalen Erweiterungen
+(Dr. Jochen Lienhard)</li>
+	<li>"Sind wir ein wenig füllig um die Hüften geworden?" Gedanken und Vorschläge zu mehr 
+Modularisierung und Schnittstellen in der VuFind 2/3 Architektur (Günter Hipler)</li>
+	</ul>
+	<i class="fa fa-puzzle-piece fa-5x"></i>
+</section>
+
+<section>
+	<h3>Verschiedene Versionen</h3>
+	<h4>Upgrades auf neue Releases zeitverzögert, stattdessen eigene Entwicklungspfade mit alten VuFind-Versionen</h4>
+	<p>Releases:</p>
+	<ul>
+	<li>v4.0 08.07.2017</li>
+	<li>v3.0 22.04.2016</li>
+	<li>v2.0 21.06.2013</li>
+	<li>v1.0 15.07.2010</li>
+	</ul>
+	<p>Nach Stand in <a href="https://vufind.org/wiki/community:installations">VuFind Wiki</a>
+nur <a href="https://find.bibliothek.tu-ilmenau.de/">TU Ilmenau</a> auf Version 4.</p>
+	<i class="fa fa-hourglass-start fa-5x"></i>
+</section>
+
+<section>
+	<img data-src="img/vufind-changelog-backward-compatibility.png" style="border:0px">
+</section>
+
+<section>
+	<h3>Zusammenhalt der Community</h3>
+	<h4>Absprung von Partnern?</h4>
+	<p>Beispiel: GBV Discovery-Service mit Eigenentwicklung Lukida statt VuFind</p>
+	<i class="fa fa-sign-out fa-5x"></i>
+	<p>Schwächung der Entwicklungsressourcen; Villanova hat übrigens nur 4 IT-Leute auf der <a href="https://library.villanova.edu/about/contactus/staff">Staff-Liste</a> (davon arbeiten 2 für VuFind)</p>
+</section>
+
+<!-- Teil 3: Therapievorschlag -->
+
+<section>
+	<h3>Therapievorschlag</h3>
+	<br>
+	<h2>Zur Prävention<br>Kräfte bündeln</h2>
+	<br>
+	<i class="fa fa-user-md fa-5x"></i>
+</section>
+
+<section>
+	<h3>Diversität nutzen</h3>
+	<i class="fa fa-globe fa-3x"></i><i class="fa fa-user-plus fa-3x"></i>
+	<br><br>
+	<p><b>Heute 16:30 Uhr</b><br>Liveschaltung nach Villanova (Richard Redweik, UB Leipzig; Demian Katz, Villanova University)</p>
+	<p><b>9./10. Oktober</b><br><a href="https://vufind.org/vufind/schedule.html">VuFind Summit 2017</a> an der Villanova University<br> (Teilnahme via Livestream)</p>
+</section>
+
+<section>
+	<h3>Institutionelle Verankerung durch Nutzergemeinschaften</h3>
+	<i class="fa fa-university fa-3x"></i><i class="fa fa-users fa-3x"></i>
+	<br><br>
+	<p><b>Heute 15:00 Uhr</b><br>Workshop Entwicklungskooperationen in der VuFind-Community (Matthias Finck, Effective Webwork; Leander Seige, UB Leipzig)</p>
+</section>
+
+<section>
+	<h3>Mehr gemeinsame Entwicklung</h3>
+	<i class="fa fa-code-fork fa-3x"></i><i class="fa fa-share-alt fa-3x"></i>
+	<br><br>
+	<p><b>Morgen 11:30 Uhr</b><br>Vortrag zur Modularisierung von VuFind<br>(Hajo Seng, SUB Hamburg)</p>
+</section>
+
+<section>
+	<h3>VuFind Einsteiger-Tutorial</h3>
+	<p>Eine Studentin hat in einer <a href="https://github.com/felixlohmeier/seminar-wir-bauen-uns-einen-bibliothekskatalog/blob/master/11_1_projektpraesentationen.md">Projektarbeit an der HAW Hamburg</a> VuFind eigenständig installiert, die Beispieldaten aus dem Seminar (Katalog der HAW Hamburg mit 500.000 Records) eingespielt und das System vorgeführt. Sie hat sehr von dem <a href="http://www.b-i-t-online.de/heft/VuFind/2016-02-tutorial.php">Einsteiger-Tutorial von Stefan Niesner</a> profitiert.</p>
+</section>
+
+<section>
+	<h3>VuFind Einsteiger-Tutorial</h3>
+	<img data-src="img/vufind-tutorial-stefanniesner.png" style="border:0px">
+</section>
+
+<section>
+	<h3>VuFind Einsteiger-Tutorial</h3>
+	<p>Für die Lehre an der HAW Chur (Sep 2017 - Jan 2018) will ich VuFind einsetzen. Dazu habe ich mir vorgenommen, die Anleitung zu aktualisieren. Mein Commitment:</p>
+	<ol>
+	<li>Fork erstellen (CC-BY-SA Lizenz)</li>
+	<li>ODT/PDF in Markdown umwandeln</li>
+	<li>Gitbook mit Suchfunktion einrichten</li>
+	<li>Anleitung für neueste VuFind-Version anpassen</li>
+	<li>Pull Request an Stefan Niesner stellen</li>
+	</ol>
+</section>
+
+<!-- Abschluss -->
+<section>
+	<h3>Fragen ans Plenum</h3>
+	<i class="fa fa-question fa-3x"></i><br>
+	<p>Was macht Ihr bereits?<br>Wozu könnt Ihr Euch "committen"?</p>
+	<br>
+	<i class="fa fa-bolt fa-3x"></i>
+	<p>Lightning Talks <b>Morgen 12:30 Uhr</b></p>
+</section>
+
+<!-- Credits -->
+<section>
+	<h3>Credits / Lizenz</h3>
+	<i class="fa fa-creative commons fa-5x"></i><br><br>
+	<ul>
+	<li>Icons: <a href="http://fontawesome.io/icons/" target="_blank">Font Awesome</a> (MIT Licence)</li>
+	<li>Präsentations-Framework: <a href="https://github.com/hakimel/reveal.js" target="_blank">Reveal.js</a> (MIT Licence)</li>
+	<li>Eigenes: <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC-BY</a></li>
+	</ul>
+</section>
+
+</div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+	// More info https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		history: true,
+		center: true,
+
+		// Optional reveal.js plugins
+		dependencies: [
+			{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+		]
+	});
+
+</script>
+</body>
+</html>

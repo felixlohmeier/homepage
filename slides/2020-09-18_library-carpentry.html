@@ -1,0 +1,419 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="author" content="Felix Lohmeier" />
+		<meta name="keywords" content="felix,lohmeier,bibliotheken,archive,museen,beratung,it,open,culture,consulting,innovation" />
+		<meta name="description" content="Lenkungsausschuss Weiterbildungsstudiengang in Bibliotheks- und Informationswissenschaft, 18.9.2020, Zürich" />
+    <meta name="referrer" content="no-referrer">
+		<title>Library Carpentry in der Hochschullehre</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css">
+
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="css/fontawesome5.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+<section data-markdown>
+<textarea data-template>
+
+## Library Carpentry in der Hochschullehre
+
+[Felix Lohmeier](https://felixlohmeier.de)
+
+Lenkungsausschuss Weiterbildungsstudiengang in Bibliotheks- und Informationswissenschaft
+
+18.9.2020, Zürich
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+![Auszug Carpentries Instructors](img/lc-instructors.png)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+## Instructors
+
+* Habe den zweitägigen Online-Kurs "Instructor Training" durchlaufen und wurde daraufhin letztes Jahr als Instructor bei The Carpentries zertifiziert (1 von [2400 weltweit](https://carpentries.org/instructors/))
+* Habe an einem [Library Carpentry Workshop im November 2018 in Hamburg](https://vdb-org.github.io/2018-11-05-Hamburg/) mitgewirkt
+* Nutze die Lehrmaterialien von Library Carpentry im Kurs [Bibliotheks- und Archivinformatik](https://bain.felixlohmeier.de) an der FH Graubünden
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+## Agenda
+
+1. The Carpentries
+2. Library Carpentry
+3. Lehrmaterialien am Beispiel von OpenRefine
+4. Pädagogische Konzepte
+5. Optionen für die Hochschullehre
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+![Carpentries Logos](img/lc-logos.png)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+## The Carpentries is...
+
+* a non-profit organization and global community
+* dedicated to building capacity in data and computing skills
+* through hands-on computational workshops
+
+Quelle: [Handout für Bibliotheksleitungen](https://raw.githubusercontent.com/LibraryCarpentry/governance/master/proposals/LibraryCarpentry_ForDirectors.pdf)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+![Zahlen aus Jahresbericht 2019](img/lc-numbers.png)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+### Zahlen
+
+* In 2019 wurden 684 Instructors angelernt und 554 Workshops durchgeführt.
+* Durch Förderungen und Mitgliedschaftsbeiträge wurden in 2019 Einnahmen von 2,6 Millionen Dollar erzielt.
+
+Quelle: [Jahresbericht 2019](https://carpentries.org/files/reports/TheCarpentries2019AnnualReport.pdf)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+### Historie
+
+![Carpentries History](img/lc-history.png)
+
+Quelle: Instructor Training [How we operate](https://carpentries.github.io/instructor-training/21-carpentries/index.html)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+### Ansatz
+
+* Toolzentrierte Hands-on Workshops
+* Dozierende ehrenamtlich
+* Lehrmaterialien werden kollaborativ bei GitHub als Open Educational Resources erstellt
+* Verpflichtender Crashkurs in evidenzbasierter Pädagogik für Dozierende
+* Schwerpunkt auf Inklusion
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+![](img/lc-venn.png)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+### Workshops 2019/2020 in der Schweiz
+
+* 21.9. - 9.10.2020 [Library Carpentry IG WBS, online](https://zbmed.github.io/2020-09-21-LC_IG_WBS_online/)
+* 27.11. - 29.11.2019 [Software Carpentry @CERN](https://unode.github.io/2019-11-27-upr/)
+* 1.7. - 2.7.2019 [Data Carpentry (Bioinformatics), University of Zurich](https://markrobinsonuzh.github.io/2019-07-01-zurich-ELIXIR-SIB/)
+* 7.2. - 8.2.2019 [Software Carpentry, University of Zurich](https://uzhcrs.github.io/2019-02-07-zurich/)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+### Instructors in der Schweiz
+
+![](img/lc-swiss.png)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+## Library Carpentry
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+### Ziele
+
+1. Cut through the jargon terms and phrases
+2. Learn how to apply data science concepts in library tasks
+3. Identify and use best practices in data structures
+4. Learn how to programmatically clean and transform data
+5. Work effectively with researchers, IT, and systems colleagues
+6. Automate repetitive, error prone tasks
+
+Quelle: [Library Carpentry Workshop Overview](https://librarycarpentry.org/lc-overview/02-intro-to-library-carpentry/index.html)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+### Curricula
+
+* keine Vorkenntnisse erforderlich
+* Lessons jeweils etwa 4 Stunden
+* in der Regel zweitägige Workshops mit 4 Lessons
+
+<https://librarycarpentry.org/lessons/>
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+#### Core Lessons
+
+![](img/lc-core.png)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+#### Extended Lessons
+
+![](img/lc-extended.png)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+#### Conceptual Lessons
+
+![](img/lc-conceptual.png)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+### Lehrmaterialien am Beispiel von OpenRefine
+
+<https://librarycarpentry.org/lc-open-refine/>
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+#### Übersicht
+
+![](img/lc-openrefine.png)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+#### Anleitung für Installation
+
+![](img/lc-setup.png)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+#### Lernziele für jedes Kapitel
+
+![](img/lc-objectives.png)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+#### Vorführung (Livecoding) und praktische Übungen
+
+![](img/lc-exercices.png)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+#### Key Points für jedes Kapitel
+
+![](img/lc-key-points.png)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+#### Hinweise für Lehrende
+
+![](img/lc-notes.png)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+#### Einladung zum Verbessern auf jeder Seite
+
+"improve this page"
+
+![](img/lc-improve.png)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+#### Verbesserungen direkt via GitHub
+
+![](img/lc-pull-requests.png)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+#### Kontinuierliche Weiterentwicklung
+
+![](img/lc-contributors.png)
+
+![](img/lc-commits.png)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+## Pädagogische Konzepte der Carpentries
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+### Code of Conduct
+
+* Use welcoming and inclusive language
+* Be respectful of different viewpoints and experiences
+* Gracefully accept constructive criticism
+* Focus on what is best for the community
+* Show courtesy and respect towards other community members
+
+<https://docs.carpentries.org/topic_folders/policies/code-of-conduct.html>
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+### Instructor Training
+
+> "pedagogical practices of live coding, pair programming, discussion, and exercises"
+
+* Mindmap einer Dozentin: <https://twitter.com/dcsoto_cl/status/1111447971550228480>
+* Lehrmaterialien für Instructor Training: <https://carpentries.github.io/instructor-training/>
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+### Teaching online
+
+* vor COVID-19 ausschließlich offline Workshops
+* in diesem Jahr nun auch online Workshops
+* Konzepte werden noch evaluiert und weiterentwickelt
+
+<https://carpentries.org/online-workshop-recommendations/>
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+## Optionen für die Hochschullehre
+
+1. Lehrmaterialien nachnutzen (qualitätsgeprüfte OER, werden kontinuierlich weiterentwickelt und sind in zahlreichen Workshops erprobt)
+2. Instructor Training für Dozierende (Crashkurs in evidenzbasierter Pädagogik)
+3. Workshops veranstalten (Instructor arbeiten ehrenamtlich, geringe Kosten)
+4. Lehrmaterialien verbessern oder neu erstellen (eigene Materialien spenden?)
+5. Mitgliedschaft bei The Carpentries (optional)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+## Credits / Lizenz
+
+Icons: [Font Awesome](http://fontawesome.io/icons/) (MIT Licence)
+
+Präsentations-Framework: [Reveal.js](https://github.com/hakimel/reveal.js) (MIT Licence)
+
+Eigenes: Dieses Werk ist lizenziert unter einer [Creative Commons Namensnennung 4.0 International Lizenz](http://creativecommons.org/licenses/by/4.0/).
+![CC BY 4.0](https://i.creativecommons.org/l/by/4.0/88x31.png)
+
+</textarea>
+</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>

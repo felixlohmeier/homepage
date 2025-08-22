@@ -1,0 +1,51 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>DLA OPAC-NG Systemarchitektur</title>
+    <meta name="author" content="Felix Lohmeier" />
+    <meta name="description" content="Flowchart zur Systemarchitektur des neuen OPACs des DLA Marbach. Erstellt für die Präsentation auf der ELAG 2019." />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+</head>
+<body>
+<div align="center"><img src="systemarchitektur.png"></div>
+<h3>Kallías</h3>
+<p>Aus dem lokalen Bibliotheksmanagementsystem Kallías (aDIS/BMS) werden alle Daten im proprietären Format aDIS-Token (Textdateien mit festen Spaltenbreiten) exportiert. Es handelt sich um eine relationale Datenstruktur, in der Medien, Exemplare, Normdaten, Erwerbungsdaten, Schlagwörter und Thesaurus in insgesamt 12 Teilbeständen abgebildet werden. Nach dem Export durch aDIS/BMS werden die Textdateien mit awk und perl vorprozessiert, u.a. um die Form von Zeilenumbrüchen und Mehrfachbelegungen nachzubearbeiten.</p>
+<h3>Python (pandas)</h3>
+<p>Der erste größere Verarbeitungsschritt erfolgt mit der Python Data Analysis Library (pandas). Ein Python Script liest die Token-Dateien ein, transformiert sie und speichert eine kommaseparierte Textdatei (.csv) pro Teilbestand. Folgende Transformationen werden durchgeführt:</p>
+<ol>
+<li>Auswahl der relevanten Felder (auf Basis einer separaten Datei feldliste.csv)</li>
+<li>Auflösung von in Kallías verwendeten technischen Kürzeln (kontrolliertes Vokabular) in vollständige Werte (auf Basis einer aus aDIS/BMS exportierten Wertetabelle, bereitgestellt als wertetabelle.csv)</li>
+<li>Änderung von weiteren Feldinhalten in benutzerverständliche Werte (auf Basis einer separaten Datei mappings.csv)</li>
+<li>Transponieren des zeilenorientierten Formats (ein Feld pro Zeile, Trennzeichen zwischen Datensätzen) in ein spaltenorientiertes Format (ein Feld pro Spalte, ein Datensatz pro Zeile)</li>
+</ol>
+<p>Im zweiten Schritt, in dem Python (pandas) zum Einsatz kommt, werden in den Normdaten enthaltene Synonyme an die Datensätze der Teilbestände zugespielt. Dies erfolgt mit individuellen Python Scripten, die ebenfalls die Python Data Analysis Library (pandas) verwenden. Das Ergebnis wird als kommaseparierte Datei (.csv) gespeichert.</p>
+<p><a href="https://pandas.pydata.org" target="_blank">https://pandas.pydata.org</a></p>
+<h3>OpenRefine (+client)</h3>
+<p>Im Mittelpunkt steht die Datenverarbeitung mit OpenRefine. Die Prozesse erfolgen automatisiert über einen ad hoc gestarteten OpenRefine-Server und eine frei verfügbare Client-Software. Hier werden die Daten für den Suchindex aufbereitet und auch inhaltlich angereichert und transformiert. Folgende Transformationen werden durchgeführt:</p>
+<ol>
+<li>Alle für die Suche relevanten Kopplungen zwischen den Teilbeständen werden aufgelöst (zusätzlich zu den Fremdschlüsseln auch die relevanten Textfelder). So werden u.a. auch die Exemplardaten an die Medien zugespielt.</li>
+<li>Für die Anzeige in der Trefferliste werden mit individuellen Regeln für jeden Teilbestand zusätzliche Felder generiert.</li>
+<li>Ebenso werden für die Facetten und Suchfilter zusätzliche Felder mit individuellen Regeln generiert.</li>
+<li>Für die Anzeige auf den medientypspezifischen Detailseiten werden diejenigen Felder vorberechnet, die nicht mit TYPO3-Bordmitteln ausgegeben werden können.</li>
+<li>Auf Basis der vorhandenen GND-IDs werden Daten aus Wikidata und Entity Facts angereichert.</li>
+<li>Für die Autovervollständigung werden zusätzliche Felder generiert und für das Ranking wird ein Score berechnet, wie oft Normdaten von anderen Teilbeständen aus verlinkt sind.</li>
+</ol>
+<p>Die Ergebnisse werden als tabseparierte Datei (.tsv) für die spätere Indexierung im Suchindex exportiert und auch in einen dauerhaften OpenRefine-Server zur Ansicht geladen. Zusätzlich wird für die Generierung von EAD aus den Beständen und Handschriften eine hierarchisch sortierte Gesamtliste erstellt, die über ein komplexes OpenRefine-Template als XML ausgegeben wird.</p>
+<p>Im Mitarbeiternetz wird ein dauerhafter OpenRefine-Server betrieben, dessen Oberfläche für alle Projektbeteiligten und weitere Kolleg*innen über den Browser zugänglich ist. Bei jeder Datenprozessierung werden die enthaltenen Daten aktualisiert. Anpassungen der Konfiguration können in der grafischen Oberfläche von OpenRefine erprobt und dann in den Konfigurationsdateien für die Automatisierung gespeichert werden. Außerdem wird der Zugriff auf die Katalogdaten in OpenRefine für weitere hausinterne Zwecke, z.B. für die Digitalisierung, eingesetzt.</p>
+<p>Fork von OpenRefine: <a href="https://github.com/opencultureconsulting/OpenRefine" target="_blank">https://github.com/opencultureconsulting/OpenRefine</a><br/>OpenRefine-client: <a href="https://github.com/opencultureconsulting/openrefine-client" target="_blank">https://github.com/opencultureconsulting/openrefine-client</a></p>
+<h3>Solr</h3>
+<p>Als Suchindex wird Apache Solr in der aktuellen Version verwendet. Die im vorigen Schritt erstellten CSV-Dateien werden via curl parallel über die CSV-Update-Schnittstelle von Solr indexiert. Durch Copyfield-Regeln werden die Inhalte von allen zu durchsuchenden Feldern in ein zusätzliches Feld kopiert. Für das Relevanzranking wird dieses Feld gering und etwa 15 weitere Felder (u.a. Felder für die Trefferliste, Namensfelder und ausgewählte Facetten) mittel bis hoch gewichtet. Aus den in OpenRefine für die Autovervollständigung generierten Feldern wird außerdem ein Suggester Service gebaut.</p>
+<p><a href="http://lucene.apache.org/solr/" target="_blank">http://lucene.apache.org/solr/</a></p>
+<h3>TYPO3-find</h3>
+<p>Die Katalogoberfläche ist mit der TYPO3-Erweiterung find der SUB Göttingen realisiert. Die Templates für die Trefferliste wurden so angepasst, dass zusätzlich stets zwei Normdatentreffer für die Suche angezeigt werden. Die Templates für die Detailseiten wurden spezifisch für die Teilbestände entwickelt. Es wurden auch kleinere Erweiterungen für TYPO3-find entwickelt, wie beispielsweise eine eigene Histogramm-Facette. Die Autovervollständigung im Suchschlitz ist mit einem Fork der Software jQuery Tokeninput und eigenen TYPO3-eID-Scripten realisiert.</p>
+<p><a href="https://github.com/subugoe/typo3-find/" target="_blank">https://github.com/subugoe/typo3-find/</a><br/><a href="http://loopj.com/jquery-tokeninput/" target="_blank">http://loopj.com/jquery-tokeninput/</a></p>
+<h3>XSLT</h3>
+<p>Der Hauptteil der Generierung von EAD/XML erfolgt im vorigen Schritt in OpenRefine. Aufgrund der komplexen Verschachtelung im EAD-Format ist es jedoch mit dem OpenRefine-Template nicht möglich, valides EAD zu erzeugen, so dass hier noch Nacharbeiten mit XSLT erforderlich sind. Der Gesamtprozess ist in einer Präsentation von 2017 erläutert:</p>
+<p><a href="https://felixlohmeier.de/slides/2017-05-05_dini-ag-kim_ead-lightning-talk.html" target="_blank">https://felixlohmeier.de/slides/2017-05-05_dini-ag-kim_ead-lightning-talk.html</a></p>
+<h3>OAI-PMH</h3>
+<p>Die generierten EAD/XML-Dateien werden über eine OAI-PMH-Schnittstelle bereitgestellt. Dazu wurde im Projekt ein dateibasierter OAI-PMH Data Provider geforkt und weiterentwickelt:</p>
+<p><a href="https://github.com/opencultureconsulting/oai_pmh" target="_blank">https://github.com/opencultureconsulting/oai_pmh</a></p>
+</body>
+</html>

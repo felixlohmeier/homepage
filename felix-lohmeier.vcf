@@ -1,0 +1,16 @@
+BEGIN:VCARD
+VERSION:3.0
+UID:37075491-CB11D2DC-50061994
+REV:2025-03-18T09:00:00+00:00
+FN:Felix Lohmeier
+N:Lohmeier;Felix;;;
+BDAY:1982-05-22
+URL:https://www.felixlohmeier.de
+PHOTO;VALUE=URI;TYPE=PNG:https://felixlohmeier.de/felix-lohmeier.png
+GEO:53.2650;9.8495
+ADR;TYPE=WORK:;;Handeloher Str. 50c;Handeloh;;21256;
+LABEL;TYPE=WORK:Handeloher Str. 50c\nHandeloh\n21256
+EMAIL;TYPE=WORK:mail@felixlohmeier.de
+TEL;TYPE=CELL:+49(0)1796605650
+SOURCE:https://felixlohmeier.de/felix-lohmeier.vcf
+END:VCARD

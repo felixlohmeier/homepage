@@ -1,0 +1,384 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="author" content="Felix Lohmeier" />
+	<meta name="keywords" content="openrefine,metadaten,ead,xml,template,xslt,stylesheet" />
+	<meta name="description" content="Lightning Talk im Workshop der DINI Arbeitsgruppe Kompetenzzentrum Interoperable Metadaten (KIM)" />
+  <meta name="referrer" content="no-referrer">
+	<title>Transformation von Metadaten in komplexe XML-Formate mit OpenRefine</title>
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/sky.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- Titel -->
+<section>
+	<h3>Transformation von Metadaten in komplexe XML-Formate mit OpenRefine</h3>
+	<br>
+	<img data-src="img/open-refine-512px.png" style="border:0px"><br><br>
+	<h4>Lightning Talk von <a href="https://felixlohmeier.de">Felix Lohmeier</a></h4>
+	<h4><a href="https://wiki.dnb.de/display/DINIAGKIM/KIM+WS+2017">Workshop DINI AG KIM</a><br>5.5.2017, Mannheim</h4>
+</section>
+
+<!-- Inhalt -->
+<section>
+	<h3>Problemstellung</h3>
+	<br>
+	<ul>
+	<li>Die Templating-Funktion von OpenRefine wird von einigen Anwendern erfolgreich genutzt, um einfache XML-Formate wie <a href="https://wiki.lib.utk.edu/pages/viewpage.action?pageId=10551387">MODS</a> zu generieren.</li>
+	<li>Komplexe XML-Formate (wie z.B. die Findbuch-Struktur von EAD) erfordern die Zusammenführung von Bestandsinformationen und zugehörigen Objekten in einen Zieldatensatz. Teilbestände, Konvolute und Objekte müssen ggf. verschachtelt werden.</li>
+	<li>Bedingt durch die zeilenbasierte Verarbeitung der Templating-Funktion müssten dazu alle für einen Zieldatensatz benötigten Daten in einer Zeile stehen.</li>
+	</ul>
+</section>
+
+<section>
+	<h3>Struktur EAD XML</h3>
+	<br>
+<pre class="stretch"><code data-trim>
+<ead ...>
+  <eadheader ...>...</eadheader>
+  <archdesc level="collection" ...>
+    <did>...</did>
+    <dsc>
+      <c level="fonds" ...>
+        <c level="class" ...>
+          <did>...</did>
+          <c level="file" ...>
+            <did>...</did>
+            <c level="item" ...">...</c>
+            <c level="item" ...">...</c>
+          </c>
+          <c level="item" ...">...</c>
+        </c>
+        <c level="item" ...">...</c>
+      </c>
+    </dsc>
+  </archdesc>
+</ead>
+</code></pre>
+</section>
+
+<section>
+	<h3>Lösungsansatz</h3>
+	<br>
+	<ul>
+	<li>Sortieren, damit Bestandsinformationen und zugehörige Objekte direkt aufeinanderfolgen</li>
+	<li>If-Funktion im Template, um verschiedene Fälle abbilden zu können</li>
+	<li>Kommentar zu Beginn jedes neuen Zieldatensatzes, damit daraufhin später der Gesamtexport gesplittet werden kann</li>
+	<li>Berechnung und Ausgabe des Hierarchielevels, damit anhand dessen mit XSLT die XML-Struktur nachträglich "verschachtelt" werden kann</li>
+	</ul>
+</section>
+
+<section>
+	<section>
+		<h3>Demo mit Beispieldaten</h3>
+		<br>
+		<ol>
+		
+		</ol>
+		<br>
+		<a href="#" class="navigate-down"><i class="fa fa-arrow-circle-down fa-3x"></i></a>
+	</section>
+	<section>
+		<h3>Gewünschter Output</h3>
+		<p>Kalliope Musterdatensatz "<a href="http://kalliope.staatsbibliothek-berlin.de/_Resources/Persistent/6560c72ae631ecfac4c60d06dde2f57a1b57ceb3.xml">Dokumentation EAD des Kalliope-Verbundes, Anhang: Minimale Anforderungen</a>"</p>
+<pre class="stretch"><code data-trim>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ead xmlns="urn:isbn:1-931666-22-9" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:isbn:1-931666-22-9 http://www.loc.gov/ead/ead.xsd">
+    <!-- Annot: Hier: Abschnitt für die Angaben über das Findbuch -->
+    <eadheader langencoding="iso639-2b" scriptencoding="iso15924" dateencoding="iso8601" countryencoding="iso3166-1" repositoryencoding="iso15511" audience="external">
+    <eadid countrycode="DE" mainagencycode="DE-2297"/>
+    <filedesc>
+    <!-- Annot: Titel des Findbuchs -->
+    	<titlestmt>
+    		<titleproper>Titel des Findbuchs</titleproper>
+    	</titlestmt>
+    </filedesc>
+    </eadheader>
+    <!-- Annot: Hier: Abschnitt für die Daten des Findbuchs -->
+    <archdesc id="DE-2297-4901" level="collection" audience="external">
+    	<did>
+    		<repository>
+    			<corpname role="Bestandshaltende Institution" authfilenumber="DE-2297" source="ISIL">Landesarchiv Berlin</corpname>
+    		</repository>
+    		<unittitle label="Titel">Titel des Nachlasses</unittitle>
+    	</did>
+    	<dsc>
+    		<c id="DE-2297-4901-1" level="fonds" audience="external">
+                <did>
+	                <repository>
+	                    <corpname role="Bestandshaltende Institution" authfilenumber="DE-2297" source="ISIL">Landesarchiv Berlin</corpname>
+	                </repository>
+	                <unittitle>Titel des Teilnachlasses</unittitle>
+				</did>
+				<c id="DE-2297-4901-2" level="class" audience="external">
+					<did>
+                        <repository>
+                            <corpname role="Bestandshaltende Institution" authfilenumber="DE-2297" source="ISIL">Landesarchiv Berlin</corpname>
+                        </repository>
+						<unittitle>Titel des Systematikpunktes</unittitle>
+					</did>
+					<c id="DE-2297-4901-3" level="file" audience="external">
+						<did>
+                            <repository>
+                                <corpname role="Bestandshaltende Institution" authfilenumber="DE-2297" source="ISIL">Landesarchiv Berlin</corpname>
+                            </repository>
+							<unittitle>Titel einer Verzeichnungseinheit (Konvolut)</unittitle>
+						</did>
+					</c>
+					<c id="DE-2297-4901-4" level="file" audience="external">
+						<did>
+                            <repository>
+                                <corpname role="Bestandshaltende Institution" authfilenumber="DE-2297" source="ISIL">Landesarchiv Berlin</corpname>
+                            </repository>
+							<unittitle>Titel einer Verzeichniseinheit (Konvolut)</unittitle>
+						</did>
+						<c id="DE-2297-4901-5" level="item" audience="external">
+							<did>
+                                <repository>
+                                    <corpname role="Bestandshaltende Institution" authfilenumber="DE-2297" source="ISIL">Landesarchiv Berlin</corpname>
+                                </repository>
+								<unittitle>Titel eines Einzeldokuments</unittitle>
+							</did>
+						</c>
+						<c id="DE-2297-4901-6" level="item" audience="external">
+							<did>
+                                <repository>
+                                    <corpname role="Bestandshaltende Institution" authfilenumber="DE-2297" source="ISIL">Landesarchiv Berlin</corpname>
+                                </repository>
+								<unittitle>Titel eines Einzeldokuments</unittitle>
+							</did>
+						</c>
+						<c id="DE-2297-4901-7" level="item" audience="external">
+							<did>
+                                <repository>
+                                    <corpname role="Bestandshaltende Institution" authfilenumber="DE-2297" source="ISIL">Landesarchiv Berlin</corpname>
+                                </repository>
+								<unittitle>Titel eines Einzeldokuments</unittitle>
+							</did>
+						</c>
+					</c>
+				</c>
+			</c>
+		</dsc>
+	</archdesc>
+</ead>
+</code></pre>
+	</section>
+	<section>
+		<h3>Input</h3>
+		<p>fiktive CSV-Daten aus Kalliope Musterdatensatz abgeleitet</p>
+<pre><code data-trim>
+id,level,title,parent
+4901,collection,Titel des Nachlasses,
+4901-1,fonds,Titel des Teilnachlasses,4901
+4901-2,class,Titel des Systematikpunktes,4901-1
+4901-3,file,Titel einer Verzeichniseinheit (Konvolut),4901-2
+4901-4,file,Titel einer Verzeichniseinheit (Konvolut),4901-2
+4901-5,item,Titel eines Einzeldokuments,4901-4
+4901-6,item,Titel eines Einzeldokuments,4901-4
+4901-7,item,Titel eines Einzeldokuments,4901-4
+</code></pre>
+	</section>
+</section>
+
+<section>
+	<section>
+		<h3>OpenRefine</h3>
+		<video data-autoplay src="video/ead-lightning-talk_openrefine.mp4"></video>
+		<a href="#" class="navigate-down"><i class="fa fa-arrow-circle-down fa-3x"></i></a>
+	</section>
+	<section>
+		<h3>Transformationen</h3>
+		<li>add new column parent2/parent3/parent4 based on column parent/parent2/parent3:<pre><code>cell.cross("ead","id")[0].cells["parent"].value)</code></pre></li>
+		<li>add new column hierarchy based on column parent4:<pre><code>join(filter(forEach(["parent4","parent3","parent2","parent","id"],cn,if(isNull(cells[cn]),"",cells[cn].value)),v,isNonBlank(v)),",")</code></pre></li>
+		<li>add column hierarchy_top based on hierarchy:<pre><code>split(value,",")[0]</code></pre></li>
+		<li>add column hierarchy_level based on hierarchy:<pre><code>hierarchy_level length(split(value,","))</code></pre></li>
+	</section>
+	<section>
+		<h3>Row Template</h3>
+<pre class="stretch"><code data-trim>
+{{if(cells["level"].value == "collection",'<!-- BEGIN EAD RECORD -->
+<ead xmlns="urn:isbn:1-931666-22-9" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:isbn:1-931666-22-9 http://www.loc.gov/ead/ead.xsd">
+<eadheader langencoding="iso639-2b" scriptencoding="iso15924" dateencoding="iso8601" countryencoding="iso3166-1" repositoryencoding="iso15511" audience="external">
+    <eadid countrycode="DE" mainagencycode="DE-2297"/>
+    <filedesc>
+        <titlestmt>
+            <titleproper>'+cells["title"].value.escape("xml")+'</titleproper>
+        </titlestmt>
+    </filedesc>
+</eadheader>
+<archdesc id="DE-2297-'+cells["id"].value.escape("xml")+'" level="collection" audience="external">
+    <did>
+        <repository>
+            <corpname role="Bestandshaltende Institution" authfilenumber="DE-2297" source="ISIL">Landesarchiv Berlin</corpname>
+        </repository>
+        <unittitle label="Titel">'+cells["title"].value.escape("xml")+'</unittitle>
+    </did>
+    <dsc>
+',"")}}{{if(cells["level"].value == "fonds",'        <c id="DE-2297-'+cells["id"].value.escape("xml")+'" level="fonds" audience="external" hierarchy_level="'+cells["hierarchy_level"].value.escape("xml")+'">
+            <did>
+                <repository>
+		            <corpname role="Bestandshaltende Institution" authfilenumber="DE-2297" source="ISIL">Landesarchiv Berlin</corpname>
+                </repository>
+                <unittitle>'+cells["title"].value.escape("xml")+'</unittitle>
+            </did>
+        </c>
+',"")}}{{if(cells["level"].value == "class",'        <c id="DE-2297-'+cells["id"].value.escape("xml")+'" level="class" audience="external" hierarchy_level="'+cells["hierarchy_level"].value.escape("xml")+'">
+            <did>
+                <repository>
+		            <corpname role="Bestandshaltende Institution" authfilenumber="DE-2297" source="ISIL">Landesarchiv Berlin</corpname>
+                </repository>
+                <unittitle>'+cells["title"].value.escape("xml")+'</unittitle>
+            </did>
+        </c>
+',"")}}{{if(cells["level"].value == "file",'        <c id="DE-2297-'+cells["id"].value.escape("xml")+'" level="file" audience="external" hierarchy_level="'+cells["hierarchy_level"].value.escape("xml")+'">
+            <did>
+                <repository>
+		            <corpname role="Bestandshaltende Institution" authfilenumber="DE-2297" source="ISIL">Landesarchiv Berlin</corpname>
+                </repository>
+                <unittitle>'+cells["title"].value.escape("xml")+'</unittitle>
+            </did>
+        </c>
+',"")}}{{if(cells["level"].value == "item",'        <c id="DE-2297-'+cells["id"].value.escape("xml")+'" level="item" audience="external" hierarchy_level="'+cells["hierarchy_level"].value.escape("xml")+'">
+            <did>
+                <repository>
+		            <corpname role="Bestandshaltende Institution" authfilenumber="DE-2297" source="ISIL">Landesarchiv Berlin</corpname>
+                </repository>
+                <unittitle>'+cells["title"].value.escape("xml")+'</unittitle>
+            </did>
+        </c>
+',"")}}
+</code></pre>
+	</section>
+</section>
+
+<section>
+	<section>
+		<h3>Nachbearbeitung mit XSLT</h3>
+		<video data-autoplay src="video/ead-lightning-talk_nachbearbeitung.mp4"></video>
+		<a href="#" class="navigate-down"><i class="fa fa-arrow-circle-down fa-3x"></i></a>
+	</section>
+	<section>
+		<h3>Vorverarbeitung</h3>
+		<br>
+		<li>Gesamtexport aufsplitten:<pre><code>csplit --prefix=ead- --suffix-format=%03d.xml --suppress-matched ead.txt '/<!-- BEGIN EAD RECORD -->/' {*}
+rm -f ead-000.xml</code></pre></li>
+		<li>Prefix und Suffix ergänzen:</li><pre><code>for i in *.xml; do printf '%s\n%s\n%s\n' '    &lt;/dsc&gt;' '&lt;/archdesc&gt;' '&lt;/ead&gt;' >> $i; sed -i '1 s/^/﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n/' $i; done</code></pre>
+	</section>
+	<section>
+		<h3>XSL Stylesheet</h3>
+		<p>Leicht abgewandelt auf Basis von <a href="http://stackoverflow.com/questions/11113161/flat-to-nested-structure-based-on-attribute-value-using-xslt">Vorlage auf Stackoverflow</a></p>
+<pre class="stretch"><code data-trim>
+<xsl:stylesheet version="2.0" 
+    xpath-default-namespace="urn:isbn:1-931666-22-9" 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xsl:output indent="yes"/>
+    <xsl:template match="@*|node()">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()"/>
+        </xsl:copy>
+    </xsl:template>
+    <xsl:template match="archdesc/dsc">
+        <xsl:element name="{name()}" namespace="urn:isbn:1-931666-22-9">
+        <xsl:copy-of select="@*[name()]"/>
+            <xsl:call-template name="process-nesting_level">
+                <xsl:with-param name="context" 
+                    select="c"/>
+                <xsl:with-param name="nesting_level" 
+                    select="2"/>
+            </xsl:call-template>
+    </xsl:element>
+    </xsl:template>
+    <xsl:template name="process-nesting_level">
+        <xsl:param name="context" required="yes" as="element()*"/>
+        <xsl:param name="nesting_level" as="xs:double"/>
+        <xsl:for-each-group select="$context" 
+            group-starting-with="*[number(@hierarchy_level) eq $nesting_level]">
+            <xsl:element name="{name()}" namespace="urn:isbn:1-931666-22-9">
+                <xsl:copy-of select="@*[name()!='hierarchy_level']"/>
+                <xsl:copy-of select="node()"/>
+                <xsl:call-template name="process-nesting_level">
+                    <xsl:with-param name="context" select="current-group()[position() != 1]"/>
+                    <xsl:with-param name="nesting_level" select="$nesting_level + 1"/>
+                </xsl:call-template>
+            </xsl:element>
+        </xsl:for-each-group>
+    </xsl:template>
+</xsl:stylesheet>
+</code></pre>
+	</section>
+	<section>
+		<h3>Prozessierung</h3>
+		<p>Über Webseite <a href="http://xsltransform.net">http://xsltransform.net</a> oder auf der Kommandozeile mit Saxon-HE:</p>
+<pre><code data-trim>
+wget -O Saxon-HE.jar http://central.maven.org/maven2/net/sf/saxon/Saxon-HE/9.7.0-18/Saxon-HE-9.7.0-18.jar
+mkdir input
+mv *.xml input/
+mkdir output
+java -jar Saxon-HE.jar -s:input -xsl:ead.xsl -o:output
+</code></pre>
+	</section>
+</section>
+
+<!-- Abschluss -->
+<section>
+	<h3>Fragen ans Plenum</h3>
+	<i class="fa fa-question fa-5x"></i><br><br>
+	<ul>
+	<li>Hat jemand Erfahrungen mit der Templating-Funktion?</li>
+	<li>Kennt jemand klügere Lösungsansätze?</li>
+	</ul>
+</section>
+
+<!-- Credits -->
+<section>
+	<h3>Credits / Lizenz</h3>
+	<i class="fa fa-creative commons fa-5x"></i><br><br>
+	<ul>
+	<li>Icons: <a href="http://fontawesome.io/icons/" target="_blank">Font Awesome</a> (MIT Licence)</li>
+	<li>Präsentations-Framework: <a href="https://github.com/hakimel/reveal.js" target="_blank">Reveal.js</a> (MIT Licence)</li>
+	<li>Eigenes: <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC-BY</a></li>
+	</ul>
+</section>
+
+</div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+	// More info https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		history: true,
+		center: true,
+
+		// Optional reveal.js plugins
+		dependencies: [
+			{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+		]
+	});
+
+</script>
+</body>
+</html>

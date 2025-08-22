@@ -1,0 +1,266 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="author" content="Felix Lohmeier" />
+		<meta name="keywords" content="felix,lohmeier,bibliotheken,archive,museen,beratung,it,open,culture,consulting,innovation" />
+		<meta name="description" content="Vortrag Automatisierungsmöglichkeiten der Software OpenRefine, 109. Bibliothekartag Bremen, 16.06.2021, #bibtag21" />
+    <meta name="referrer" content="no-referrer">
+		<title>Automatisierungsmöglichkeiten der Software OpenRefine</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css">
+
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="css/fontawesome5.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+<!-- Titel -->
+
+<section>
+	<h3>Automatisierungsmöglichkeiten der Software OpenRefine</h3>
+  <h1><i class="fa fa-gem"></i> + <i class="fa fa-robot"></i></h1>
+  <br>
+	<h4><a href="https://felixlohmeier.de" target="_blank">Felix Lohmeier</a></h4>
+	<h4>#bibtag21, 16.06.2021</h4>
+</section>
+
+<!-- Inhalt -->
+
+<section>
+  <h3>OpenRefine</h3>
+  <i class="fa fa-gem fa-3x"></i>
+  <br><br>
+  <ul>
+    <li>grafische Oberfläche, die einer klassischen Tabellenverarbeitungssoftware ähnelt</li>
+    <li>dient der Analyse, Bereinigung, Konvertierung und Anreicherung von Daten</li>
+    <li>wird in der Regel lokal auf einem Computer installiert und über den Browser bedient</li>
+    <li>Open-Source-Software mit <a href="https://github.com/OpenRefine/OpenRefine/graphs/contributors" target="_blank">aktiver Community</a></li>
+</section>
+
+<section>
+  <section>
+    <h3>Live-Vorführung Teil 1</h3>
+    <ul>
+      <li>Szenario: Mit OpenRefine Liste von Schriftsteller*innen (Name, Geburtsdatum) mit Wikidata abgleichen und darüber GND-ID und Geburtsort ermitteln.</li>
+      <li>Vorgehen:
+        <ol>
+        <li>Import CSV-Datei</li>
+        <li>Ableitung Spalte Geburtsjahr aus Geburtsdatum</li>
+        <li>Abgleich mit Wikidata und Anreicherung</li>
+        <li>Export in TSV-Datei</li>
+        </ol>
+      </li>
+    </ul>
+  </section>
+
+  <section data-background-image="img/openrefine-import.png">
+    <h3><span style="background-color: white; color: red">Import</span></h3>
+  </section>
+
+  <section data-background-image="img/openrefine-transformation.png">
+    <h3><br><span style="background-color: white; color: red">Transformation</span></h3>
+  </section>
+
+  <section data-background-image="img/openrefine-anreicherung.png">
+    <h3><span style="background-color: white; color: red">Anreicherung</span></h3>
+  </section>
+
+  <section data-background-image="img/openrefine-undo-redo.png">
+    <h3><span style="background-color: white; color: red">Undo / Redo</span></h3>
+  </section>
+
+  <section data-background-image="img/openrefine-export.png">
+    <h3><span style="background-color: white; color: red">Export</span></h3>
+  </section>
+</section>
+
+<section>
+  <h3>Warum automatisieren?</h3>
+  <i class="fa fa-robot fa-3x"></i>
+  <br><br>
+  <ul>
+    <li>Zeitersparnis bei sich wiederholenden Aufgaben</li>
+    <li>Reproduzierbarkeit durch eindeutige Dokumentation im Code</li>
+    <li>Arbeitsteilung zwischen Metadaten-Expert*innen und IT-Personal</li>
+</section>
+
+<section>
+  <h3>Client-Server-Architektur</h3>
+  <ul>
+    <li>Web-Applikation mit klarer Trennung zwischen Datenhaltung und Benutzerschnittstelle
+      <ul>
+        <li>Server: Java servlet ausgeführt in Jetty Webserver; Datenhaltung In-Memory bzw. dateibasiert</li>
+        <li>Client: HTML, CSS und Javascript</li>
+      </ul>
+    </li>
+    <li>Server und Client kommunizieren über HTTP GET und POST (vgl. <a href="https://docs.openrefine.org/technical-reference/openrefine-api" target="_blank">OpenRefine API</a>)</li>
+  </ul>
+</section>
+
+<section>
+  <h3>Verfügbare Clients</h3>
+  <div style="display: flex">
+    <div style="flex: 1">
+      <ul>
+        <li><a href="https://github.com/opencultureconsulting/openrefine-client" target="_blank">Python</a> *</li>
+        <li><a href="https://cran.r-project.org/web/packages/rrefine/index.html" target="_blank">R</a> *</li>
+        <li><a href="https://github.com/dtap-gmbh/refine-java" target="_blank">Java</a> *</li>
+        <li><a href="https://gist.github.com/felixlohmeier/d76bd27fbc4b8ab6d683822cdf61f81d" target="_blank">Bash</a> *</li>
+        <li><a href="https://github.com/ADelRosarioH/OpenRefine.Net" target="_blank">.NET</a> *</li>
+    </div>
+    <div style="flex: 1">
+      <ul>
+        <li><a href="https://github.com/keboola/openrefine-php-client" target="_blank">PHP</a></li>
+        <li><a href="https://github.com/distillytics/refine-ruby" target="_blank">Ruby</a></li>
+        <li><a href="https://github.com/pm5/node-openrefine" target="_blank">NodeJS</a></li>
+        <li><a href="https://github.com/Eonm/refine-io" target="_blank">Rust</a></li>
+    </div>
+  </div>
+  <br><br>
+  <p>* unterstützt OpenRefine 3.3 und neuer</p>
+</section>
+
+<section>
+  <h3>openrefine-client</h3>
+  <i class="fa fa-terminal fa-3x"></i>
+  <br><br>
+  <ul>
+    <li><a href="https://github.com/opencultureconsulting/openrefine-client" target="_blank">Fork des Python-Clients</a> mit erweitertem Kommandozeilen-Interface</li>
+    <li>Als kleine ausführbare Datei (5 MB) erhältlich für Windows, Mac und Linux</li>
+    <li>Kann somit unabhängig von der Programmiersprache in Workflows genutzt werden</li>
+  </ul>
+</section>
+
+<section>
+  <section>
+    <h3>Live-Vorführung Teil 2</h3>
+    <ul>
+      <li>Automatisierung der manuellen Schritte aus Teil 1</li>
+      <li>Wer es direkt selbst mit nachvollziehen möchte, kann jetzt eine Arbeitsumgebung via mybinder.org starten:<br><a href="https://github.com/felixlohmeier/bibtag21-automatisierung-openrefine" target="_blank">bibtag21-automatisierung-openrefine</a></li>
+      <li>Vorgehen:
+        <ol>
+          <li>OpenRefine starten</li>
+          <li>openrefine-client ausführen
+            <ul>
+              <li>Import CSV-Datei</li>
+              <li>Anwendung der Undo/Redo-Historie</li>
+              <li>Export in TSV</li>
+            </ul>
+          </li>
+        </ol>
+      </li>
+    </ul>
+  </section>
+
+  <section data-background-image="img/openrefine-server.png">
+    <h3><span style="background-color: white; color: red">OpenRefine starten</span></h3>
+  </section>
+
+  <section data-background-image="img/openrefine-client.png">
+    <h3><br><span style="background-color: white; color: red">openrefine-client ausführen</span></h3>
+  </section>
+
+  <section data-background-image="img/openrefine-url.png">
+    <h3><br><br><span style="background-color: white; color: red">Ergebnisse in OpenRefine prüfen</span></h3>
+  </section>
+</section>
+
+<section>
+  <h3>Workflow</h3>
+  <i class="fa fa-cog fa-3x"></i>
+  <br>
+  <p>Für eine vollständige Automatisierung müsste der gezeigte Ablauf noch als Workflow eingerichtet werden.</p>
+  <ul>
+    <li>Logging</li>
+    <li>Scheduling</li>
+    <li>Ergebnisvalidierung</li>
+    <li>Fehlerbehandlung</li>
+    <li>ggf. Parallelisierung</li>
+    <li>ggf. Caching</li>
+  </ul>
+</section>
+
+<section>
+  <h3>Verfügbare Workflow-Tools für OpenRefine</h3>
+  <ul>
+    <li><a href="https://github.com/opencultureconsulting/openrefine-batch" target="_blank">openrefine-batch</a>: Shell-Script für einfache Workflows</li>
+    <li><a href="https://github.com/opencultureconsulting/openrefine-task-runner" target="_blank">openrefine-task-runner</a>: Vorlagen für komplexere Workflows, nutzt go-task als task runner.</li>
+  </ul>
+</section>
+
+<section>
+  <h3>Einschränkungen</h3>
+  <ul>
+    <li>Für größere Datenmengen wird viel Arbeitsspeicher benötigt (Limitierung entfällt für <a href="https://groups.google.com/g/openrefine-dev/c/YxQ-gv93phE/m/nrWW6STBBAAJ" target="_blank">OpenRefine 4.0</a>, das auf Spark basieren wird)</li>
+    <li>Undo/Redo-Historie im JSON-Dateiformat ist schwierig anzupassen, was die Nachnutzbarkeit einschränkt</li>
+    <li>Das Entwicklerteam rät eher davon ab, komplexe Workflows mit OpenRefine umzusetzen
+(vgl. <a href="https://groups.google.com/g/openrefine-dev/c/42mdP8gyt4M/m/s21fJ3W6BQAJ" target="_blank">Einschätzung auf der Mailingliste</a>)</li>
+  </ul>
+</section>
+
+<section>
+  <h3>Praxisbeispiele</h3>
+  <ul>
+    <li>Konvertierung von Bibliotheca und Alephino nach PICA+ für die Berufsakademien Sachsen: <a href="https://github.com/opencultureconsulting/ba-sachsen-pica" target="_blank">ba-sachsen-pica bei GitHub</a></li>
+    <li>Harvesting von OAI-PMH-Schnittstellen und Transformation in METS/MODS für das Portal noah.nrw: <a href="https://github.com/opencultureconsulting/noah" target="_blank">noah bei GitHub</a></li>
+    <li>Datenintegration für den neuen Katalog des DLA Marbach: <a href="https://doi.org/10.5281/zenodo.2678112" target="_blank">Präsentation auf der ELAG 2019</a></li>
+  </ul>
+</section>
+
+<section>
+  <h3>Fragen / Diskussion</h3>
+  <i class="fa fa-question fa-3x"></i>
+  <br><br>
+  <ul>
+    <li>Für die Vorführung der Workflow-Tools fehlte die Zeit, daher separate Videokonferenz mit Live-Vorführung von openrefine-task-runner und Gelegenheit zu vertiefter Diskussion: <a href="https://poll.opencultureconsulting.com/VWied7w85DPpFuVL" target="_blank">Terminumfrage (28.6. - 9.7.)</a></li>
+    <li>Spontane Fragen und Kommentare gerne jetzt <i class="fa fa-smile"></i></li>
+  </ul>
+</section>
+
+<!-- Credits -->
+
+<section>
+	<h3>Credits / Lizenz</h3>
+	<i class="fa fa-creative commons fa-5x"></i><br><br>
+	<ul>
+	<li>Icons: <a href="http://fontawesome.io/icons/" target="_blank">Font Awesome</a> (MIT Licence)</li>
+	<li>Präsentations-Framework: <a href="https://github.com/hakimel/reveal.js" target="_blank">Reveal.js</a> (MIT Licence)</li>
+	<li>Dieses Werk ist lizenziert unter einer <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Namensnennung 4.0 International Lizenz</a>. <img data-src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="CC BY 4.0" style="border:0px"></li>
+	</ul>
+</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>

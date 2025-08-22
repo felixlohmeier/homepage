@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="author" content="Felix Lohmeier" />
+		<meta name="keywords" content="felix,lohmeier,bibliotheken,archive,museen,beratung,it,open,culture,consulting,innovation" />
+		<meta name="description" content="Markdown-Workshop auf dem OERcamp 2019 in Lübeck" />
+    <meta name="referrer" content="no-referrer">
+		<title>Präsentationsfolien erstellen und kollaborativ bearbeiten mit HackMD</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css">
+
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+<section data-markdown>
+<textarea data-template>
+
+# Slides
+
+## Präsentationsfolien erstellen und kollaborativ bearbeiten mit HackMD
+
+[Felix Lohmeier](https://felixlohmeier.de) (Open Culture Consulting)
+
+[OERcamp 2019 Lübeck](https://www.oercamp.de/19/lubeck/), 13./14. Juni 2019
+
+Note:
+  speaker note
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+![OERcamp Lübeck 2019](https://www.oercamp.de/wp-content/uploads/2019/04/OERcamp-Lu%CC%88beck-Anmeldung-1024x572.jpg)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+## Abstract
+
+* In diesem Workshop zu HackMD und Markdown werden gemeinsam vertiefend die Möglichkeiten der Plattform https://hackmd.io erprobt.
+* Die Teilnehmenden erfahren, wie sie mit HackMD Präsentationsfolien erstellen und zur kollaborativen Bearbeitung für andere freigeben können.
+* Siehe auch [Teil 1: Kollaborative Erstellung eines Readers mit HackMD – Markdown für Einsteiger](2019-06-13_oercamp-reader.html)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+## Anforderungen an Slides
+
+* Online und Print (HTML, PDF, evtl. PPTX)
+* Präsentationsmodus mit Speaker Notes
+* kollaborative Erstellung (Änderungskontrolle, gleichzeitige Bearbeitung)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+## Warum Markdown?
+
+* in jedem Texteditor lesbar
+* Formatierung reduziert auf das Wesentliche
+* funktioniert gut mit Versionskontrolle (Änderungen über automatisches diff nachvollziehbar, weil Textformat)
+* für das Web gemacht, Basis für zahlreiche Tools und Workflows
+* lässt sich gut in verschiedene Ausgabeformen (HTML, PDF, PPTX usw.) konvertieren
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+## Einführung in Markdown
+
+War Teil des [Einsteiger-Workshops](2019-06-13_oercamp-reader.html), also überspringen wir das hier:
+* https://www.markdownguide.org/cheat-sheet
+* http://markdowntutorial.com
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+## HackMD vs. CodiMD
+
+* HackMD [hat 2017 eine separate Enterprise Version veröffentlicht](https://hackmd.io/c/community-news/https%3A%2F%2Fhackmd.io%2Fs%2FBk-zpEC9-)
+* HackMD community edition [wurde 2018 mit v1.2.0 in CodiMD umbenannt](https://github.com/hackmdio/hackmd/issues/720)
+
+![Mermaid Diagramm](img/oercamp-mermaid.png)
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+## Features HackMD vs. CodiMD
+
+| Funktion   | CodiMD             | Hackmd.io          | demo.hackmd.io     |
+| ---------- | ------------------ | ------------------ | ------------------ |
+| [Book Mode](https://hackmd.io/book-example) | ❌ | ❌ | ✅ |
+| [Slide Mode](https://hackmd.io/slide-example) | ✅ | ❌ | ✅ |
+| [Templates](https://hackmd.io/c/news/%2Fs%2Fr13SRPOYV) | ❌ | ✅ | ❌ |
+| Export     | + PDF              | + ODF              | + ODF              |
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+## Übung: Gemeinsame Präsentation zum OERcamp erstellen
+
+Link zum gemeinsamen Dokument in der CodiMD-Installation der GWDG:
+
+Do, 13.6.: https://pad.gwdg.de/p/vC8VR2qNK/edit
+
+Fr, 14.6.: https://pad.gwdg.de/p/imrlcq9L0/edit
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+## Markdown vielseitig verwendbar
+
+* Mit CodiMD Export in HTML oder PDF möglich
+* [Pandoc](https://pandoc.org/MANUAL.html#producing-slide-shows-with-pandoc) konvertiert in reveal.js, S5, DZSlides, Slidy, Slideous, PPTX, ...
+* Software für Markdown-Präsentationen mit Windows ([Slidify](http://slidify.org)) und macOS ([Deckset](https://www.deckset.com))
+* Online-Plattformen sind nicht so beständig, daher die Markdown-Dateien in einem Git-Repository und das Ergebnis als PDF in einem Repository veröffentlichen?
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+## Übung: Pandoc Live
+
+https://pandoc.org/try/
+
+Konvertierung der zuvor erstellten Präsentation in reveal.js.
+
+Der generierte Abschnitt muss in eine [Basis-Installation von reveal.js](https://github.com/hakimel/reveal.js/#basic-setup) eingefügt werden.
+
+Alternativ kann das Markdown auch [direkt in reveal.js eingebunden](https://github.com/hakimel/reveal.js#markdown) werden.
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+## Alternativen
+
+* [GitPitch](https://gitpitch.com)
+* [Deckdown](http://deckdown.org)
+* ...
+
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+
+## Credits / Lizenz
+
+Die Folien wurden erstellt mit [CodiMD](https://github.com/hackmdio/codimd) (AGPL 3.0). Für die Präsentation verwendet CodiMD u.a. [Reveal.js](https://github.com/hakimel/reveal.js) (MIT) und [Mermaid](https://github.com/knsv/mermaid) (MIT).
+
+Eigenes: Dieses Werk ist lizenziert unter einer [Creative Commons Namensnennung 4.0 International Lizenz](http://creativecommons.org/licenses/by/4.0/).
+![CC BY 4.0](https://i.creativecommons.org/l/by/4.0/88x31.png)
+
+</textarea>
+</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
